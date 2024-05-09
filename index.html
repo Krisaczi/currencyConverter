@@ -7,16 +7,20 @@
     <title>Document</title>
   </head>
   <body>
-    <section id="top">
-      <div class="logo"></div>
-      <div class="title">Currency converter</div>
-    </section>
-    <section id="bottom">
-      <input type="text" />
-      <select class="currencies"></select>
-      <button class="btn">Calculate</button>
-      <div class="conversion">equals <span class="result">0</span></div>
-    </section>
+    <div id="wrapper">
+      <section id="top">
+        <div class="logo"></div>
+        <div class="title">Currency converter</div>
+      </section>
+      <section id="bottom">
+        Enter the amount you would like to change to PLN
+        <br />
+        <input type="text" class="inputValue" />
+        <select class="currencies"></select>
+        <button class="btn">Calculate</button>
+        <div class="conversion"></div>
+      </section>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>

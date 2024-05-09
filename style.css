@@ -11,3 +11,17 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+#wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.7)
+    ),
+    url(/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
