@@ -20,7 +20,12 @@ currDrop();
 btn.addEventListener("click", () => {
   try {
     fetch(URL + selectOptions.value)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((data) => {
         if (!isNaN(input.value) && input.value > 0) {
           conversion.innerHTML = `For ${selectOptions.value} ${input.value}  you will get PLN ${(data.rates[0].mid * input.value).toFixed(2)}`;
