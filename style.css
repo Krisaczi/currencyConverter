@@ -1,6 +1,15 @@
 #top {
   display: flex;
   align-items: center;
+  gap: 20px;
+}
+#bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-size: 32px;
+  margin-top: 20px;
 }
 
 .logo {
@@ -16,12 +25,61 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   background: linear-gradient(
-      rgba(255, 255, 255, 0.7),
-      rgba(255, 255, 255, 0.7)
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.9)
     ),
     url(/background.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.inputValue {
+  border: none;
+  background-color: gainsboro;
+  padding: 10px;
+  text-align: right;
+  border: 1px solid wheat;
+}
+.inputValue:focus {
+  border: none;
+  background-color: whitesmoke;
+  padding: 10px;
+  text-align: right;
+  border: 1px solid wheat;
+  font-weight: bold;
+}
+
+.currencies {
+  padding: 10px;
+  border-radius: 4px;
+  background-color: gainsboro;
+}
+
+.currencies:focus {
+  background-color: whitesmoke;
+}
+
+.title {
+  font-size: 48px;
+}
+
+.btn {
+  border-radius: 3px;
+  border: 0.1px solid black;
+  background-color: rgb(26, 104, 26);
+  color: white;
+  padding: 10px;
+}
+
+.btn:hover {
+  border-radius: 3px;
+  border: 0.1px solid black;
+  background-color: rgb(34, 214, 34);
+  color: black;
+  padding: 10px;
+  transition: 0.5s ease-in-out;
 }
