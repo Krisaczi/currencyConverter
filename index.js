@@ -4,14 +4,16 @@ const selectOptions = document.querySelector(".currencies");
 const btn = document.querySelector(".btn");
 const conversion = document.querySelector(".conversion");
 const input = document.querySelector(".inputValue");
+const loader = document.querySelector("#loader");
+const form = document.querySelector("#conversionForm");
 
 const showLoader = () => {
-  document.getElementById("loader").style.display = "block";
+  loader.style.display = "block";
 };
 
 // Function to hide the loader
 const hideLoader = () => {
-  document.getElementById("loader").style.display = "none";
+  loader.style.display = "none";
 };
 
 hideLoader();
@@ -27,29 +29,44 @@ const currDrop = () => {
 currDrop();
 
 //Conversion
-btn.addEventListener("click", () => {
-  try {
-    showLoader();
-    fetch(URL + selectOptions.value)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (!isNaN(input.value) && input.value > 0) {
-          setTimeout(() => {
-            hideLoader();
-            conversion.innerHTML = `For ${selectOptions.value} ${input.value}  you will get PLN ${(data.rates[0].mid * input.value).toFixed(2)}`;
-          }, 2000);
-        } else {
-          alert("Please provide a valid amount");
-        }
-      });
-  } catch (error) {
-    alert("Calculation failed" + error);
+const calculateConversion = (e) => {
+  e.preventDefault();
+  const existingLabel = document.querySelector(".warning");
+  if (existingLabel) {
+    form.removeChild(existingLabel);
   }
-});
+  if (!isNaN(input.value) && input.value > 0) {
+    try {
+      showLoader();
+      fetch(URL + selectOptions.value)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          const rate = data?.rates?.[0]?.mid;
+          if (!isNaN(input.value) && input.value > 0) {
+            setTimeout(() => {
+              hideLoader();
+              conversion.innerHTML = `For ${selectOptions.value} ${input.value}  you will get PLN ${(rate * input.value).toFixed(2)}`;
+            }, 500);
+          } else {
+            alert("Please provide a valid amount");
+          }
+        });
+    } catch (error) {
+      alert("Calculation failed" + error);
+    }
+  } else {
+    //alert("Please provide a valid amount11");
+    const label = document.createElement("label");
+    label.classList.add("warning");
+    label.style.color = "red";
+    label.textContent = "Please provide a valid amount";
+    form.appendChild(label);
+  }
+};
 
-// Call showLoader when you start a task
+form.addEventListener("submit", calculateConversion);

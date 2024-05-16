@@ -73,6 +73,7 @@
   background-color: rgb(26, 104, 26);
   color: white;
   padding: 10px;
+  transition: 0.5s ease-in-out;
 }
 
 .btn:hover {
@@ -81,7 +82,13 @@
   background-color: rgb(34, 214, 34);
   color: black;
   padding: 10px;
-  transition: 0.5s ease-in-out;
+}
+
+#conversionForm {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: baseline;
 }
 
 .loader {
@@ -91,6 +98,10 @@
   width: 60px;
   height: 60px;
   animation: spin 2s linear infinite;
+}
+
+.loaderHidden {
+  display: none;
 }
 
 @keyframes spin {
