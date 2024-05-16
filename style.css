@@ -76,14 +76,6 @@
   transition: 0.5s ease-in-out;
 }
 
-.btn:hover {
-  border-radius: 3px;
-  border: 0.1px solid black;
-  background-color: rgb(34, 214, 34);
-  color: black;
-  padding: 10px;
-}
-
 #conversionForm {
   display: flex;
   flex-direction: row;
@@ -104,6 +96,15 @@
   display: none;
 }
 
+@media (hover: hover) {
+  .btn:hover {
+    border-radius: 3px;
+    border: 0.1px solid black;
+    background-color: rgb(34, 214, 34);
+    color: black;
+    padding: 10px;
+  }
+}
 @keyframes spin {
   0% {
     transform: rotate(0deg);
