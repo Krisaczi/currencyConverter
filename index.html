@@ -7,24 +7,24 @@
     <title>Currency converter</title>
   </head>
   <body>
-    <div id="wrapper">
-      <header id="top">
+    <div class="container">
+      <header class="header">
         <div class="logo"></div>
         <h1 class="title">Currency converter</h1>
       </header>
-      <section id="bottom">
+      <section class="bottom">
         Enter the amount you would like to change to PLN
 
-        <form id="conversionForm">
+        <form id="cnvForm" class="conversionForm">
           <div class="selection">
-            <input type="text" class="inputValue" />
-            <select class="currencies"></select>
+            <input type="text" id="inpVal" class="inputValue" />
+            <select id="currencyList" class="currencies"></select>
           </div>
-          <button class="btn">Calculate</button>
+          <button id="calculate" class="btn">Calculate</button>
         </form>
 
         <div id="loader" class="loader loaderHidden"></div>
-        <h2 class="conversion"></h2>
+        <h2 id="result" class="conversion"></h2>
       </section>
     </div>
     <script src="index.js"></script>

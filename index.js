@@ -1,11 +1,11 @@
 const URL = "https://api.nbp.pl/api/exchangerates/rates/A/";
-let currencies = ["USD", "CHF", "EUR"];
-const selectOptions = document.querySelector(".currencies");
-const btn = document.querySelector(".btn");
-const conversion = document.querySelector(".conversion");
-const input = document.querySelector(".inputValue");
+const currencies = ["USD", "CHF", "EUR"];
+const selectOptions = document.querySelector("#currencyList");
+const btn = document.querySelector("#calculate");
+const conversion = document.querySelector("#result");
+const input = document.querySelector("#inpVal");
 const loader = document.querySelector("#loader");
-const form = document.querySelector("#conversionForm");
+const form = document.querySelector("#cnvForm");
 
 const showLoader = () => {
   loader.style.display = "block";
@@ -29,7 +29,7 @@ const currDrop = () => {
 currDrop();
 
 //Conversion
-const calculateConversion = (e) => {
+const calculateConversion = async (e) => {
   e.preventDefault();
   const existingLabel = document.querySelector(".warning");
   if (existingLabel) {
@@ -38,29 +38,19 @@ const calculateConversion = (e) => {
   if (!isNaN(input.value) && input.value > 0) {
     try {
       showLoader();
-      fetch(URL + selectOptions.value)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          const rate = data?.rates?.[0]?.mid;
-          if (!isNaN(input.value) && input.value > 0) {
-            setTimeout(() => {
-              hideLoader();
-              conversion.innerHTML = `For ${selectOptions.value} ${input.value}  you will get PLN ${(rate * input.value).toFixed(2)}`;
-            }, 500);
-          } else {
-            alert("Please provide a valid amount");
-          }
-        });
+      const response = await fetch(URL + selectOptions.value);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      const rate = data?.rates?.[0]?.mid;
+      conversion.innerHTML = `For ${selectOptions.value} ${input.value} you will get PLN ${(rate * input.value).toFixed(2)}`;
     } catch (error) {
-      alert("Calculation failed" + error);
+      alert("Calculation failed: " + error);
+    } finally {
+      hideLoader();
     }
   } else {
-    //alert("Please provide a valid amount11");
     const label = document.createElement("label");
     label.classList.add("warning");
     label.style.color = "red";
